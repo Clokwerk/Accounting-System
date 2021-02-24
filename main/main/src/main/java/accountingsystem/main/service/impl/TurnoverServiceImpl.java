@@ -27,10 +27,6 @@ public class TurnoverServiceImpl implements TurnoverService {
         return turnoverRepository.findById(id).orElseThrow(TurnoverNotFoundException::new);
     }
 
-    @Override
-    public List<Turnover> findByNameLike(String name){
-        return turnoverRepository.findByNameLike(name);
-    }
 
     @Override
     public Turnover save(String date, Long price, Integer numberProducts, Long sumProfit) {
