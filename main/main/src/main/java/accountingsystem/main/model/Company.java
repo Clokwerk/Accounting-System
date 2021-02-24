@@ -15,7 +15,7 @@ public class Company {
     @ManyToMany
     private List<Product> products;
     @ManyToMany
-    private List<Service> services;
+    private List<WorkService> workServices;
     private String address;
     @Column(name="incorporation_date")
     private String incorporationDate;

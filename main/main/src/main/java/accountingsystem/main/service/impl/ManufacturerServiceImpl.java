@@ -1,14 +1,12 @@
 package accountingsystem.main.service.impl;
 
-import accountingsystem.main.exceptions.ManufacturerInvalidIdException;
-import accountingsystem.main.model.Company;
+import accountingsystem.main.exceptions.ManufacturerNotFoundException;
 import accountingsystem.main.model.Manufacturer;
 import accountingsystem.main.repository.ManufacturerRepository;
 import accountingsystem.main.service.ManufacturerService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
@@ -26,7 +24,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer findById(Long id) {
-        return this.manufacturerRepository.findById(id).orElseThrow(ManufacturerInvalidIdException::new);
+        return this.manufacturerRepository.findById(id).orElseThrow(ManufacturerNotFoundException::new);
     }
 
     @Override
@@ -45,7 +43,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public Manufacturer deleteById(Long Id) {
         Manufacturer manufacturer = this.manufacturerRepository
                 .findById(Id)
-                .orElseThrow(ManufacturerInvalidIdException::new);
+                .orElseThrow(ManufacturerNotFoundException::new);
 
          this.manufacturerRepository.deleteById(Id);
          return manufacturer;

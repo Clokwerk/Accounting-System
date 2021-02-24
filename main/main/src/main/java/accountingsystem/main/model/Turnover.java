@@ -15,7 +15,7 @@ public class Turnover {
     @Column(name="sum_profit")
     private Long sumProfit;
     @ManyToMany
-    private List<Service> serviceList;
+    private List<WorkService> workServiceList;
     @ManyToMany
     private List<Product> productList;
     public Turnover( String date, Long price, Integer numberProducts, Long sumProfit) {

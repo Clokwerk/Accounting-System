@@ -1,14 +1,13 @@
 package accountingsystem.main.service;
 
-import accountingsystem.main.model.Company;
+import accountingsystem.main.model.Turnover;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface TurnoverService {
-    List<Company> findAll();
-    Optional<Company> findById(Long id);
-    List<Company> findByNameLike(String name);
-    Company save(String address,String founder,String incorporationDate,String taxNumber,String registeredNumber);
-    Company deleteById(Long Id);
+    List<Turnover> findAll();
+    Turnover findById(Long id);
+    List<Turnover> findByNameLike(String name);
+    Turnover save(String date, Long price, Integer numberProducts, Long sumProfit);
+    Turnover deleteById(Long Id);
 }
