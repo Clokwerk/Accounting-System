@@ -14,8 +14,8 @@ public class Manufacturer {
     public Manufacturer() {
     }
 
-    public Manufacturer(Integer id, String name, String country) {
-        Id = id;
+    public Manufacturer( String name, String country) {
+
         this.name = name;
         this.country = country;
     }

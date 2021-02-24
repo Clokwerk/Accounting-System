@@ -18,8 +18,8 @@ public class Turnover {
     private List<Service> serviceList;
     @ManyToMany
     private List<Product> productList;
-    public Turnover(Long id, String date, Long price, Integer numberProducts, Long sumProfit) {
-        Id = id;
+    public Turnover( String date, Long price, Integer numberProducts, Long sumProfit) {
+
         this.date = date;
         this.price = price;
         this.numberProducts = numberProducts;

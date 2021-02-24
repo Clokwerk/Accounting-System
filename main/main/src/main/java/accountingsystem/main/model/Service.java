@@ -15,8 +15,8 @@ public class Service {
 
 
 
-    public Service(Long id, String name, String description, Long price) {
-        Id = id;
+    public Service( String name, String description, Long price) {
+
         this.name = name;
         this.description = description;
         this.price = price;

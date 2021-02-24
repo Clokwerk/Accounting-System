@@ -21,9 +21,9 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String description, String name, Manufacturer manufacturer, Long price, String date,
+    public Product(String description, String name, Manufacturer manufacturer, Long price, String date,
                    String expirationDate) {
-        Id = id;
+
         this.description = description;
         this.name = name;
         this.manufacturer = manufacturer;

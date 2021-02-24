@@ -24,9 +24,9 @@ public class Company {
     @Column(name="registered_number")
     private String registeredNumber;
 
-    public Company(Long id, String name, String founder, String address, String incorporationDate, String taxNumber,
+    public Company( String name, String founder, String address, String incorporationDate, String taxNumber,
                    String registeredNumber) {
-        Id = id;
+
         this.name = name;
         this.founder = founder;
         this.address = address;
