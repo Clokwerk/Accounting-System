@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface TurnoverRepository extends JpaRepository<Turnover, Long> {
-    public List<Turnover> findByNameLike(String name);
+
 }

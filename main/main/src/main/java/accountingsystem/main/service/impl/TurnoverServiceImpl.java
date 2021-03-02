@@ -28,11 +28,6 @@ public class TurnoverServiceImpl implements TurnoverService {
     }
 
     @Override
-    public List<Turnover> findByNameLike(String name){
-        return turnoverRepository.findByNameLike(name);
-    }
-
-    @Override
     public Turnover save(String date, Long price, Integer numberProducts, Long sumProfit) {
         Turnover turnover = new Turnover(date,price,numberProducts,sumProfit);
         turnoverRepository.save(turnover);
