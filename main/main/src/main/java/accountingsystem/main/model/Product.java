@@ -1,6 +1,7 @@
 package accountingsystem.main.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -11,9 +12,9 @@ public class Product {
     private String description;
     private String name;
     private Long price;
-    private String date;
+    private LocalDateTime date;
     @Column(name="expiration_date")
-    private String expirationDate;
+    private LocalDateTime expirationDate;
     @ManyToOne
     private Manufacturer manufacturer;
 
@@ -21,8 +22,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(String description, String name, Manufacturer manufacturer, Long price, String date,
-                   String expirationDate) {
+    public Product(String description, String name, Manufacturer manufacturer, Long price, LocalDateTime date,
+                   LocalDateTime expirationDate) {
 
         this.description = description;
         this.name = name;
@@ -64,19 +65,19 @@ public class Product {
         this.price = price;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
-    public String getExpirationDate() {
+    public LocalDateTime getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(String expirationDate) {
+    public void setExpirationDate(LocalDateTime expirationDate) {
         this.expirationDate = expirationDate;
     }
 

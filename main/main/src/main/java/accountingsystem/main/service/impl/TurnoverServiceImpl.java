@@ -6,17 +6,20 @@ import accountingsystem.main.model.Product;
 import accountingsystem.main.model.Turnover;
 import accountingsystem.main.model.WorkService;
 import accountingsystem.main.repository.TurnoverRepository;
+import accountingsystem.main.service.CompanyService;
 import accountingsystem.main.service.TurnoverService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class TurnoverServiceImpl implements TurnoverService {
     private final TurnoverRepository turnoverRepository;
-
-    public TurnoverServiceImpl(TurnoverRepository turnoverRepository) {
+    private final CompanyService companyService;
+    public TurnoverServiceImpl(TurnoverRepository turnoverRepository, CompanyService companyService) {
         this.turnoverRepository = turnoverRepository;
+        this.companyService = companyService;
     }
 
     @Override
@@ -33,7 +36,7 @@ public class TurnoverServiceImpl implements TurnoverService {
 
     @Override
     public Turnover save(
-            String date,
+            LocalDateTime date,
             Long price,
             Integer numberProducts,
             Long sumProfit,
@@ -58,4 +61,12 @@ public class TurnoverServiceImpl implements TurnoverService {
         turnoverRepository.deleteById(Id);
         return turnover;
     }
+
+    @Override
+    public Double getTotalTurnover(Long companyId) {
+        Company company = this.companyService.findById(companyId).orElseThrow(RuntimeException::new);
+        return this.turnoverRepository.calculateTotalTurnover(company);
+    }
+
+
 }

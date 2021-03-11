@@ -1,6 +1,7 @@
 package accountingsystem.main.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -8,7 +9,7 @@ public class Turnover {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    private String date;
+    private LocalDateTime date;
     private Long price;
     @Column(name="number_products")
     private Integer numberProducts;
@@ -21,7 +22,7 @@ public class Turnover {
     @ManyToOne
     private Company company;
 
-    public Turnover(String date, Long price, Integer numberProducts, Long sumProfit, List<WorkService> workServiceList,
+    public Turnover(LocalDateTime date, Long price, Integer numberProducts, Long sumProfit, List<WorkService> workServiceList,
                     List<Product> productList, Company company) {
         this.date = date;
         this.price = price;
@@ -67,11 +68,11 @@ public class Turnover {
         Id = id;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

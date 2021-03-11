@@ -1,6 +1,7 @@
 package accountingsystem.main.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class Company {
     private List<WorkService> workServices;
     private String address;
     @Column(name="incorporation_date")
-    private String incorporationDate;
+    private LocalDateTime incorporationDate;
     @Column(name="tax_number")
     private String taxNumber;
     @Column(name="registered_number")
@@ -28,7 +29,7 @@ public class Company {
 
     public Company(String name, String founder, List<Product> products, List<WorkService> workServices,
                    String address,
-                   String incorporationDate, String taxNumber, String registeredNumber, User user) {
+                   LocalDateTime incorporationDate, String taxNumber, String registeredNumber, User user) {
         this.name = name;
         this.founder = founder;
         this.products = products;
@@ -101,11 +102,11 @@ public class Company {
         this.address = address;
     }
 
-    public String getIncorporationDate() {
+    public LocalDateTime getIncorporationDate() {
         return incorporationDate;
     }
 
-    public void setIncorporationDate(String incorporationDate) {
+    public void setIncorporationDate(LocalDateTime incorporationDate) {
         this.incorporationDate = incorporationDate;
     }
 

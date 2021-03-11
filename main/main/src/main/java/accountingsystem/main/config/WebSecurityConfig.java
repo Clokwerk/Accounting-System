@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/images/**","/css/**","/js/**","/oauth2/**").permitAll() // /images,/css,/js se defaultni lokacii za spring za cuvanje na staticni resursi: .css files, sliki i .js fajlovi. Site lokalni resursi stavajte gi vo tie folderi inaku Spring Security ke gi blokira.
+                .antMatchers("/","/images/**","/css/**","/js/**","/oauth2/**","/api/**").permitAll() // /images,/css,/js se defaultni lokacii za spring za cuvanje na staticni resursi: .css files, sliki i .js fajlovi. Site lokalni resursi stavajte gi vo tie folderi inaku Spring Security ke gi blokira.
                 .antMatchers("/company","/manufacturer","/product","/workservice").hasRole("USER")
                 .anyRequest()
                 .authenticated()
@@ -43,8 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/auth/login")
         .and()
-        .oauth2Login()
-        ;
+        .oauth2Login();
 
 
 

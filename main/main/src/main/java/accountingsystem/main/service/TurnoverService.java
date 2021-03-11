@@ -4,14 +4,25 @@ import accountingsystem.main.model.Company;
 import accountingsystem.main.model.Product;
 import accountingsystem.main.model.Turnover;
 import accountingsystem.main.model.WorkService;
+import accountingsystem.main.resource.MonthlyTurnover;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TurnoverService {
     List<Turnover> findAll();
     Turnover findById(Long id);
 
-    Turnover save(String date, Long price, Integer numberProducts, Long sumProfit, List<WorkService> workServiceList,
-                  List<Product> productList , Company company);
+    Turnover save(
+            LocalDateTime date,
+            Long price,
+            Integer numberProducts,
+            Long sumProfit,
+            List<WorkService> workServiceList,
+            List<Product> productList,
+            Company company);
     Turnover deleteById(Long Id);
+
+    Double getTotalTurnover(Long companyId);
+
 }

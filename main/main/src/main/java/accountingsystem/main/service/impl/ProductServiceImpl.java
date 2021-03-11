@@ -1,11 +1,13 @@
 package accountingsystem.main.service.impl;
 
 import accountingsystem.main.exceptions.ProductNotFoundException;
+import accountingsystem.main.model.Manufacturer;
 import accountingsystem.main.model.Product;
 import accountingsystem.main.repository.ProductRepository;
 import accountingsystem.main.service.ProductService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -33,12 +35,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product save(String description, String name, Long price, String date) {
-        Product product = new Product();
-        product.setDescription(description);
-        product.setName(name);
-        product.setPrice(price);
-        product.setDate(date);
+    public Product save(String description, String name, Manufacturer manufacturer, Long price, LocalDateTime date,
+                        LocalDateTime expirationDate) {
+        Product product = new Product(
+                description,
+                name,
+                manufacturer,
+                price,
+                date,
+                expirationDate);
+
         productRepository.save(product);
         return product;
     }

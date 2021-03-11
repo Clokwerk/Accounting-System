@@ -9,6 +9,7 @@ import accountingsystem.main.repository.CompanyRepository;
 import accountingsystem.main.service.CompanyService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public class CompanyServiceImpl implements CompanyService {
                         List<Product> products,
                         List<WorkService> workServices,
                         String address,
-                        String incorporationDate,
+                        LocalDateTime incorporationDate,
                         String taxNumber,
                         String registeredNumber,
                         User user) {

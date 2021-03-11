@@ -5,6 +5,7 @@ import accountingsystem.main.model.Product;
 import accountingsystem.main.model.User;
 import accountingsystem.main.model.WorkService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public interface CompanyService {
             List<Product> products,
             List<WorkService> workServices,
             String address,
-            String incorporationDate,
+            LocalDateTime incorporationDate,
             String taxNumber,
             String registeredNumber,
             User user);
