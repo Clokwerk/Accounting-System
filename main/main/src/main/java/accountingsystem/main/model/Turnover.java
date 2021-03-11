@@ -18,12 +18,42 @@ public class Turnover {
     private List<WorkService> workServiceList;
     @ManyToMany
     private List<Product> productList;
-    public Turnover( String date, Long price, Integer numberProducts, Long sumProfit) {
+    @ManyToOne
+    private Company company;
 
+    public Turnover(String date, Long price, Integer numberProducts, Long sumProfit, List<WorkService> workServiceList,
+                    List<Product> productList, Company company) {
         this.date = date;
         this.price = price;
         this.numberProducts = numberProducts;
         this.sumProfit = sumProfit;
+        this.workServiceList = workServiceList;
+        this.productList = productList;
+        this.company = company;
+    }
+
+    public List<WorkService> getWorkServiceList() {
+        return workServiceList;
+    }
+
+    public void setWorkServiceList(List<WorkService> workServiceList) {
+        this.workServiceList = workServiceList;
+    }
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Turnover() {

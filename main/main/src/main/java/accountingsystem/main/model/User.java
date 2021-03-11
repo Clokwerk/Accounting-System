@@ -1,6 +1,5 @@
 package accountingsystem.main.model;
 
-import jdk.jfr.DataAmount;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

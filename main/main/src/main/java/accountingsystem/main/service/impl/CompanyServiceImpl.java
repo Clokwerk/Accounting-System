@@ -2,6 +2,9 @@ package accountingsystem.main.service.impl;
 
 import accountingsystem.main.exceptions.CompanyNotFoundException;
 import accountingsystem.main.model.Company;
+import accountingsystem.main.model.Product;
+import accountingsystem.main.model.User;
+import accountingsystem.main.model.WorkService;
 import accountingsystem.main.repository.CompanyRepository;
 import accountingsystem.main.service.CompanyService;
 import org.springframework.stereotype.Service;
@@ -35,16 +38,26 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Company save(String address,
+    public Company save(String name,
                         String founder,
+                        List<Product> products,
+                        List<WorkService> workServices,
+                        String address,
                         String incorporationDate,
                         String taxNumber,
-                        String registeredNumber) {
-        Company company = new Company();
-        company.setAddress(address);
-        company.setFounder(founder);
-        company.setIncorporationDate(incorporationDate);
-        company.setTaxNumber(taxNumber);
+                        String registeredNumber,
+                        User user) {
+        Company company = new Company(
+                name,
+                founder,
+                products,
+                workServices,
+                address,
+                incorporationDate,
+                taxNumber,
+                registeredNumber,
+                user
+        );
         return companyRepository.save(company);
     }
 
