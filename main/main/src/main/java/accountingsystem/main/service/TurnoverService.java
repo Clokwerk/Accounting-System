@@ -4,7 +4,6 @@ import accountingsystem.main.model.Company;
 import accountingsystem.main.model.Product;
 import accountingsystem.main.model.Turnover;
 import accountingsystem.main.model.WorkService;
-import accountingsystem.main.resource.MonthlyTurnover;
 
 import java.time.LocalDateTime;
 import java.util.List;

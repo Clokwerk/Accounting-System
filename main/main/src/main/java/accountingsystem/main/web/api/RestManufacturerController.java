@@ -31,10 +31,8 @@ public class RestManufacturerController {
     }
     @PostMapping("/addManufacturer")
     public ResponseEntity addTurnover(
-                                      @RequestParam String name,
-                                      @RequestParam String date
-
-                                       ){
+            @RequestParam String name,
+            @RequestParam String date){
 
         Manufacturer newManufacturer=this.manufacturerService.save(name,date);
         if(newManufacturer == null){

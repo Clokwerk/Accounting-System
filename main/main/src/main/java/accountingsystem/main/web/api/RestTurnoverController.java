@@ -5,7 +5,7 @@ import accountingsystem.main.model.Company;
 import accountingsystem.main.model.Product;
 import accountingsystem.main.model.Turnover;
 import accountingsystem.main.model.WorkService;
-import accountingsystem.main.resource.CompanyTotalTurnover;
+import accountingsystem.main.resource.response.CompanyTotalTurnover;
 import accountingsystem.main.service.CompanyService;
 import accountingsystem.main.service.ProductService;
 import accountingsystem.main.service.TurnoverService;
@@ -42,7 +42,6 @@ public class RestTurnoverController {
                 company.getName(),
                 totalTurnOver);
         return ResponseEntity.ok(companyTotalTurnover);
-
     }
     @PostMapping("/addTurnover")
     public ResponseEntity addTurnover( @RequestParam String date,

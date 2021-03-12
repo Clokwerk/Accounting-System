@@ -1,4 +1,4 @@
-package accountingsystem.main.resource;
+package accountingsystem.main.resource.response;
 
 import java.time.LocalDateTime;
 
