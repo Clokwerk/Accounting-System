@@ -22,17 +22,17 @@ public class RestWorkServicesController {
     }
 
     @GetMapping("/getWorkServiceById/{workServiceId}")
-    public ResponseEntity<WorkService> getTurnoverById(@RequestParam Long workServiceId){
+    public ResponseEntity<WorkService> getWorkServicesById(@RequestParam Long workServiceId){
         WorkService result=this.workServicesService.findById(workServiceId);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/getAllWorkServices")
-    public ResponseEntity<List<WorkService>> getAllTurnovers(){
+    public ResponseEntity<List<WorkService>> getAllWorkServices(){
         List<WorkService> workServices=this.workServicesService.findAll();
         return ResponseEntity.ok(workServices);
     }
     @PostMapping("/addWorkService")
-    public ResponseEntity addTurnover( @RequestParam String name,
+    public ResponseEntity addWorkService( @RequestParam String name,
                                         @RequestParam String description,
                                          @RequestParam Long price){
 
@@ -47,7 +47,7 @@ public class RestWorkServicesController {
 
     }
     @DeleteMapping("/deleteWorkService")
-    public ResponseEntity<Long> deleteTurnover(@RequestParam Long Id){
+    public ResponseEntity<Long> deleteWorkService(@RequestParam Long Id){
         WorkService workService=this.workServicesService.deleteById(Id);
         if(workService== null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
