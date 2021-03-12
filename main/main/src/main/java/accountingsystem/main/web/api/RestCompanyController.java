@@ -2,6 +2,7 @@ package accountingsystem.main.web.api;
 
 import accountingsystem.main.model.*;
 import accountingsystem.main.repository.UserRepository;
+import accountingsystem.main.resource.request.AddCompanyRequest;
 import accountingsystem.main.service.CompanyService;
 import accountingsystem.main.service.ProductService;
 import accountingsystem.main.service.UserService;
@@ -50,37 +51,30 @@ public class RestCompanyController {
         return ResponseEntity.ok(companies);
     }
     @PostMapping("/addCompany")
-    public ResponseEntity addCompany( @RequestParam String name,
-                                       @RequestParam String address,
-                                       @RequestParam String founder,
-                                       @RequestParam String incorporationDate,
-                                       @RequestParam String taxNumber,
-                                       @RequestParam String registeredNumber,
-                                       @RequestParam Long userId,
-                                       @RequestParam List<Long> workServiceIds,
-                                       @RequestParam List<Long> productsIds){
+    public ResponseEntity addCompany(@RequestBody AddCompanyRequest addCompanyRequest){
 
-        List<WorkService> workServices= workServiceIds.stream().
+        List<WorkService> workServices= addCompanyRequest.getWorkServiceIds().stream().
                 map(x->this.workServicesService.findById(x)).
                 collect(Collectors.toList());
-        List<Product> products=productsIds.stream().
+        List<Product> products=addCompanyRequest.getProductsIds().stream().
                 map(x->this.productService.findById(x)).
                 collect(Collectors.toList());
-        User user=this.userRepository.findById(userId).orElse(null);
+        User user=this.userRepository.findById(addCompanyRequest.getUserId()).orElse(null);
         DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm");
-        LocalDateTime newIncorporationDate=LocalDateTime.parse(incorporationDate,formatter);
+        LocalDateTime newIncorporationDate=LocalDateTime.parse(addCompanyRequest.getIncorporationDate(),formatter);
         if(user == null){
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
-        Company newCompany=this.companyService.save(name,
-                                                    founder,
-                                                    products,
-                                                    workServices,
-                                                    address,
-                                                    newIncorporationDate,
-                                                    taxNumber,
-                                                    registeredNumber,
-                                                    user
+        Company newCompany=this.companyService.save(
+                addCompanyRequest.getName(),
+                addCompanyRequest.getFounder(),
+                products,
+                workServices,
+                addCompanyRequest.getAddress(),
+                newIncorporationDate,
+                addCompanyRequest.getTaxNumber(),
+                addCompanyRequest.getRegisteredNumber(),
+                user
                                                     );
         if(newCompany == null){
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
