@@ -23,17 +23,17 @@ public class RestProductController {
         this.manufacturerService=manufacturerService;
     }
     @GetMapping("/getProductById/{productId}")
-    public ResponseEntity<Product> getTurnoverById(@RequestParam Long productId){
+    public ResponseEntity<Product> getProductById(@RequestParam Long productId){
         Product result=this.productService.findById(productId);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/getAllProducts")
-    public ResponseEntity<List<Product>> getAllTurnovers(){
+    public ResponseEntity<List<Product>> getAllProducts(){
         List<Product> products=this.productService.findAll();
         return ResponseEntity.ok(products);
     }
     @PostMapping("/addProduct")
-    public ResponseEntity addTurnover( @RequestParam String description,
+    public ResponseEntity addProduct( @RequestParam String description,
                                        @RequestParam String name,
                                        @RequestParam Long manufacturerId,
                                        @RequestParam Long price,
@@ -57,7 +57,7 @@ public class RestProductController {
 
     }
     @DeleteMapping("/deleteProduct")
-    public ResponseEntity<Long> deleteTurnover(@RequestParam Long Id){
+    public ResponseEntity<Long> deleteProduct(@RequestParam Long Id){
         Product deletedProduct=this.productService.deleteById(Id);
         if(deletedProduct == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

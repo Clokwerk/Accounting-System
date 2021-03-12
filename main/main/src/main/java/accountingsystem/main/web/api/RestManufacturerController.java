@@ -19,13 +19,13 @@ public class RestManufacturerController {
         this.manufacturerService=manufacturerService;
     }
     @GetMapping("/getManufacturerById/{manufacturerId}")
-    public ResponseEntity<Manufacturer> getTurnoverById(@PathVariable Long manufacturerId){
+    public ResponseEntity<Manufacturer> getManufacturerById(@PathVariable Long manufacturerId){
         Manufacturer result=this.manufacturerService.findById(manufacturerId);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/getAllManufacturers")
-    public ResponseEntity<List<Manufacturer>> getAllTurnovers(){
+    public ResponseEntity<List<Manufacturer>> getAllManufacturers(){
         List<Manufacturer> manufacturers=this.manufacturerService.findAll();
         return ResponseEntity.ok(manufacturers);
     }
@@ -44,7 +44,7 @@ public class RestManufacturerController {
 
     }
     @DeleteMapping("/deleteManufacturer")
-    public ResponseEntity<Long> deleteTurnover(@RequestParam Long Id){
+    public ResponseEntity<Long> deleteManufacturer(@RequestParam Long Id){
         Manufacturer deletedManufacturer=this.manufacturerService.deleteById(Id);
         if(deletedManufacturer == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
