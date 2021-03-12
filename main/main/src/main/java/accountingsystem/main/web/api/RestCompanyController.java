@@ -50,7 +50,7 @@ public class RestCompanyController {
         return ResponseEntity.ok(companies);
     }
     @PostMapping("/addCompany")
-    public ResponseEntity addTurnover( @RequestParam String name,
+    public ResponseEntity addCompany( @RequestParam String name,
                                        @RequestParam String address,
                                        @RequestParam String founder,
                                        @RequestParam String incorporationDate,
@@ -91,7 +91,7 @@ public class RestCompanyController {
 
     }
     @DeleteMapping("/deleteCompany")
-    public ResponseEntity<Long> deleteTurnover(@RequestParam Long Id){
+    public ResponseEntity<Long> deleteCompany(@RequestParam Long Id){
         Company deletedCompany=this.companyService.deleteById(Id);
         if(deletedCompany == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
