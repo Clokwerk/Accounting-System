@@ -68,4 +68,9 @@ public class CompanyServiceImpl implements CompanyService {
         this.deleteById(Id);
         return company;
     }
+
+    @Override
+    public List<Company> findByUser(User user) {
+      return this.companyRepository.findAllByUser(user);
+    }
 }

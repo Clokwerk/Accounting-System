@@ -24,4 +24,5 @@ public interface CompanyService {
             String registeredNumber,
             User user);
     Company deleteById(Long Id);
+    List<Company> findByUser(User user);
 }
