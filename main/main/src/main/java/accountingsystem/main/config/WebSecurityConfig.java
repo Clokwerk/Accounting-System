@@ -1,6 +1,5 @@
 package accountingsystem.main.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/images/**","/css/**","/js/**","/oauth2/**","/api/**").permitAll() // /images,/css,/js se defaultni lokacii za spring za cuvanje na staticni resursi: .css files, sliki i .js fajlovi. Site lokalni resursi stavajte gi vo tie folderi inaku Spring Security ke gi blokira.
+                .antMatchers("/","/images/**","/css/**","/js/**","/oauth2/**","/api/**", "/vendor/**", "/img/**").permitAll() // /images,/css,/js se defaultni lokacii za spring za cuvanje na staticni resursi: .css files, sliki i .js fajlovi. Site lokalni resursi stavajte gi vo tie folderi inaku Spring Security ke gi blokira.
                 .antMatchers("/company","/manufacturer","/product","/workservice").hasRole("USER")
                 .anyRequest()
                 .authenticated()
@@ -34,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/auth/login").permitAll()
                 .failureUrl("/auth/login?error=BadCredentials")
-                .defaultSuccessUrl("/company",true)
+                .defaultSuccessUrl("/dashboard",true)
                 .and()
                 .logout()
                 .logoutUrl("/auth/logout")
