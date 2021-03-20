@@ -18,9 +18,16 @@ public class UserServiceImpl implements UserService {
         this.userRepository=userRepository;
         this.passwordEncoder=passwordEncoder;
     }
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return this.userRepository.findByUsername(s).orElseThrow(()->new UsernameNotFoundException(s));
+    }
+
+    @Override
+    public User findByUsername(String username){
+        User user = this.userRepository.findByUsername(username).get();
+        return user;
     }
 
 }
