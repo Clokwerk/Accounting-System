@@ -13,6 +13,7 @@ import java.util.Collections;
 public class User implements UserDetails {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
     private String username;
 
@@ -36,8 +37,7 @@ public class User implements UserDetails {
 
 }
 
-    public User(Long id, String username, String password, String firstName, String lastName) {
-        Id = id;
+    public User( String username, String password, String firstName, String lastName) {
         this.username = username;
         this.password = password;
         FirstName = firstName;

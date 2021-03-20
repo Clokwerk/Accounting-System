@@ -11,18 +11,21 @@ import java.util.Random;
 
 @Controller
 public class RegisterController {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
     public RegisterController(UserRepository userRepository,PasswordEncoder passwordEncoder){
         this.userRepository=userRepository;
         this.passwordEncoder=passwordEncoder;
     }
+
     @GetMapping("/register")
     public String getRegisterPage(){
         return "register";
     }
-    @PostMapping("/register")
 
+    @PostMapping("/register")
     public String registerUser(HttpServletRequest request){
         String firstName=request.getParameter("firstName").toString();
         String lastName=request.getParameter("lastName").toString();
@@ -38,8 +41,7 @@ public class RegisterController {
             return "redirect:/register";
         }
         String hashedPassword=passwordEncoder.encode(password);
-        Random random=new Random();
-        this.userRepository.save(new User(random.nextLong(),email,hashedPassword,firstName,lastName));
+        this.userRepository.save(new User(email,hashedPassword,firstName,lastName));
         return "redirect:/dashboard";
 
     }
