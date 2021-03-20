@@ -14,7 +14,6 @@ public interface TurnoverService {
 
     Turnover save(
             LocalDateTime date,
-            Long price,
             Integer numberProducts,
             Long sumProfit,
             List<WorkService> workServiceList,

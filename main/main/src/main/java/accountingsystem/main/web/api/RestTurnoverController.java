@@ -5,6 +5,10 @@ import accountingsystem.main.model.Company;
 import accountingsystem.main.model.Product;
 import accountingsystem.main.model.Turnover;
 import accountingsystem.main.model.WorkService;
+import accountingsystem.main.model.views.TurnoverByMonthView;
+import accountingsystem.main.repository.TurnoverRepository;
+import accountingsystem.main.repository.views.TurnoverByMonthInterface;
+import accountingsystem.main.repository.views.TurnoverByMonthViewRepository;
 import accountingsystem.main.resource.response.CompanyTotalTurnover;
 import accountingsystem.main.service.CompanyService;
 import accountingsystem.main.service.ProductService;
@@ -22,11 +26,15 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/turnover")
 public class RestTurnoverController {
+    private final TurnoverByMonthViewRepository turnoverByMonthViewRepository;
+    private final TurnoverRepository turnoverRepository;
     private final TurnoverService turnoverService;
     private final CompanyService companyService;
     private final WorkServicesService workServicesService;
     private final ProductService productService;
-    public RestTurnoverController(TurnoverService turnoverService, CompanyService companyService, WorkServicesService workServicesService,ProductService productService) {
+    public RestTurnoverController(TurnoverByMonthViewRepository turnoverByMonthViewRepository, TurnoverRepository turnoverRepository, TurnoverService turnoverService, CompanyService companyService, WorkServicesService workServicesService, ProductService productService) {
+        this.turnoverByMonthViewRepository = turnoverByMonthViewRepository;
+        this.turnoverRepository = turnoverRepository;
         this.turnoverService = turnoverService;
         this.companyService = companyService;
         this.workServicesService=workServicesService;
@@ -45,9 +53,8 @@ public class RestTurnoverController {
     }
     @PostMapping("/addTurnover")
     public ResponseEntity addTurnover( @RequestParam String date,
-                                       @RequestParam Long price,
                                        @RequestParam Integer numberProducts,
-                                       @RequestParam Long sumProfit,
+                                       @RequestParam Long amount,
                                        @RequestParam List<Long> workServiceIds,
                                        @RequestParam List<Long> productsIds,
                                        @RequestParam Long companyId){
@@ -63,7 +70,7 @@ public class RestTurnoverController {
         if(company==null){
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
-        Turnover newTurnover=this.turnoverService.save(newDate,price,numberProducts,sumProfit,workServices,products,company);
+        Turnover newTurnover=this.turnoverService.save(newDate,numberProducts,amount,workServices,products,company);
         if(newTurnover == null){
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
             //change return status code if needed
@@ -81,6 +88,13 @@ public class RestTurnoverController {
         return new ResponseEntity<>(Id, HttpStatus.OK);
     }
 
+    @GetMapping("/byMonth")
+    public ResponseEntity<List<TurnoverByMonthView>> getTurnoverByMonths(){
+        return ResponseEntity.ok(this.turnoverByMonthViewRepository.findAll());
+    }
 
-
+    @GetMapping("/byMonth2")
+    public ResponseEntity<List<TurnoverByMonthInterface>> getTurnoverByMonths2(){
+        return ResponseEntity.ok(this.turnoverRepository.getTurnoverMonthly());
+    }
 }

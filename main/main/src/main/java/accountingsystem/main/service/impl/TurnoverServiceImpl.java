@@ -37,7 +37,6 @@ public class TurnoverServiceImpl implements TurnoverService {
     @Override
     public Turnover save(
             LocalDateTime date,
-            Long price,
             Integer numberProducts,
             Long sumProfit,
             List<WorkService> workServiceList,
@@ -45,7 +44,6 @@ public class TurnoverServiceImpl implements TurnoverService {
             Company company) {
         Turnover turnover = new Turnover(
                 date,
-                price,
                 numberProducts,
                 sumProfit,
                 workServiceList,

@@ -10,11 +10,11 @@ public class Turnover {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private LocalDateTime date;
-    private Long price;
+
     @Column(name="number_products")
     private Integer numberProducts;
-    @Column(name="sum_profit")
-    private Long sumProfit;
+    @Column(name="amount")
+    private Long amount;
     @ManyToMany
     private List<WorkService> workServiceList;
     @ManyToMany
@@ -22,12 +22,12 @@ public class Turnover {
     @ManyToOne
     private Company company;
 
-    public Turnover(LocalDateTime date, Long price, Integer numberProducts, Long sumProfit, List<WorkService> workServiceList,
+    public Turnover(LocalDateTime date, Integer numberProducts, Long amount, List<WorkService> workServiceList,
                     List<Product> productList, Company company) {
+
         this.date = date;
-        this.price = price;
         this.numberProducts = numberProducts;
-        this.sumProfit = sumProfit;
+        this.amount = amount;
         this.workServiceList = workServiceList;
         this.productList = productList;
         this.company = company;
@@ -76,13 +76,6 @@ public class Turnover {
         this.date = date;
     }
 
-    public Long getPrice() {
-        return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
-    }
 
     public Integer getNumberProducts() {
         return numberProducts;
@@ -92,11 +85,11 @@ public class Turnover {
         this.numberProducts = numberProducts;
     }
 
-    public Long getSumProfit() {
-        return sumProfit;
+    public Long getAmount() {
+        return amount;
     }
 
-    public void setSumProfit(Long sumProfit) {
-        this.sumProfit = sumProfit;
+    public void setAmount(Long sumProfit) {
+        this.amount = sumProfit;
     }
 }
