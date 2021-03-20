@@ -5,6 +5,7 @@ import accountingsystem.main.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
@@ -22,25 +23,34 @@ public class RegisterController {
         return "register";
     }
     @PostMapping("/register")
+    @ResponseBody
 
-    public String registerUser(HttpServletRequest request){
+    public RedirectView registerUser(@RequestParam(name="firstName") String firstName,
+                               @RequestParam(name="lastName") String lastName,
+                               @RequestParam(name="email") String email,
+                               @RequestParam(name="password") String password,
+                               @RequestParam(name="repeatPassword") String repeatPassword
+    ){
+        /*
         String firstName=request.getParameter("firstName").toString();
         String lastName=request.getParameter("lastName").toString();
         String email=request.getParameter("email").toString();
         String password=request.getParameter("password").toString();
         String repeatPassword=request.getParameter("repeatPassword").toString();
+        */
+
         if(firstName == null || firstName.equals("") || lastName == null || lastName.equals("") || email==null ||
         email.equals("") || password==null){
-            return "redirect:/register";
+            return new RedirectView("/register");
             //define exception if needed
         }
         if(!password.equals(repeatPassword)){
-            return "redirect:/register";
+            return new RedirectView("/register");
         }
         String hashedPassword=passwordEncoder.encode(password);
         Random random=new Random();
         this.userRepository.save(new User(random.nextLong(),email,hashedPassword,firstName,lastName));
-        return "redirect:/dashboard";
+        return new RedirectView("/dashboard");
 
     }
 
