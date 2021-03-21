@@ -13,8 +13,6 @@ public class WorkService {
     private String description;
     private Long price;
 
-
-
     public WorkService(String name, String description, Long price) {
 
         this.name = name;

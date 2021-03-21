@@ -1,12 +1,10 @@
 package accountingsystem.main.web.api;
 
 import accountingsystem.main.factory.CompanyFactory;
-import accountingsystem.main.model.Company;
-import accountingsystem.main.model.Product;
-import accountingsystem.main.model.Turnover;
-import accountingsystem.main.model.WorkService;
+import accountingsystem.main.model.*;
 import accountingsystem.main.model.views.TurnoverByMonthView;
 import accountingsystem.main.repository.TurnoverRepository;
+import accountingsystem.main.repository.UserRepository;
 import accountingsystem.main.repository.views.TurnoverByMonthInterface;
 import accountingsystem.main.repository.views.TurnoverByMonthViewRepository;
 import accountingsystem.main.resource.response.CompanyTotalTurnover;
@@ -18,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -32,13 +31,15 @@ public class RestTurnoverController {
     private final CompanyService companyService;
     private final WorkServicesService workServicesService;
     private final ProductService productService;
-    public RestTurnoverController(TurnoverByMonthViewRepository turnoverByMonthViewRepository, TurnoverRepository turnoverRepository, TurnoverService turnoverService, CompanyService companyService, WorkServicesService workServicesService, ProductService productService) {
+    private final UserRepository userRepository;
+    public RestTurnoverController(TurnoverByMonthViewRepository turnoverByMonthViewRepository, TurnoverRepository turnoverRepository, TurnoverService turnoverService, CompanyService companyService, WorkServicesService workServicesService, ProductService productService, UserRepository userRepository) {
         this.turnoverByMonthViewRepository = turnoverByMonthViewRepository;
         this.turnoverRepository = turnoverRepository;
         this.turnoverService = turnoverService;
         this.companyService = companyService;
         this.workServicesService=workServicesService;
         this.productService=productService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/getTotalTurnover/{companyId}")
@@ -94,7 +95,18 @@ public class RestTurnoverController {
     }
 
     @GetMapping("/byMonth2")
-    public ResponseEntity<List<TurnoverByMonthInterface>> getTurnoverByMonths2(){
-        return ResponseEntity.ok(this.turnoverRepository.getTurnoverMonthly());
+    public ResponseEntity<List<TurnoverByMonthInterface>> getTurnoverByMonths2(Principal principal){
+        String username = principal.getName();
+        User user = this.userRepository.findByUsername(username).get();
+
+        Company company = user.getCompanies().stream().findFirst().get();
+        Long companyId = company.getId();
+
+        List<TurnoverByMonthInterface> turnoverByMonthInterfaceList =
+                this.turnoverRepository.getTurnoverMonthly().stream()
+                .filter(x -> x.getcompany_id().equals(companyId))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(turnoverByMonthInterfaceList);
     }
 }
