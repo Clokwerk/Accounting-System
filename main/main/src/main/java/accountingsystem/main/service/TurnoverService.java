@@ -22,5 +22,9 @@ public interface TurnoverService {
     Turnover deleteById(Long Id);
 
     Double getTotalTurnover(Long companyId);
+    List<Turnover> getAllByCompanyAndMonth(Long companyId,LocalDateTime date);
+
+
+
 
 }

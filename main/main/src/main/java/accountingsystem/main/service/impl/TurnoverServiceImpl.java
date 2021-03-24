@@ -65,6 +65,11 @@ public class TurnoverServiceImpl implements TurnoverService {
         Company company = this.companyService.findById(companyId).orElseThrow(RuntimeException::new);
         return this.turnoverRepository.calculateTotalTurnover(company);
     }
+    @Override
+    public List<Turnover> getAllByCompanyAndMonth(Long companyId,LocalDateTime date){
+        Company company=this.companyService.findById(companyId).orElseThrow(RuntimeException::new);
+        return this.turnoverRepository.getAllByCompanyAndDateIsContaining(company,date);
+    }
 
 
 }

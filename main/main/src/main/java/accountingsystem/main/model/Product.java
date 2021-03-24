@@ -12,12 +12,29 @@ public class Product {
     private String description;
     private String name;
     private Long price;
+    private Long procurementPrice;
+    private Long profit;
     private LocalDateTime date;
     @Column(name="expiration_date")
     private LocalDateTime expirationDate;
     @ManyToOne
     private Manufacturer manufacturer;
 
+    public Long getProcurementPrice() {
+        return procurementPrice;
+    }
+
+    public void setProcurementPrice(Long procurementPrice) {
+        this.procurementPrice = procurementPrice;
+    }
+
+    public Long getProfit() {
+        return profit;
+    }
+
+    public void setProfit(Long profit) {
+        this.profit = profit;
+    }
 
     public Product() {
     }
